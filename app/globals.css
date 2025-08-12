@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #ffffff;
+    --foreground: #ededed;
+  }
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-size: 16px;
+  color: #7c7c7c;
+  background: #0d131b;
+  font-family: Arial, Helvetica, sans-serif;
+  cursor: default;
+  overflow-x: hidden;
+}
+
+@theme {
+  --color-primary: #4898d3;
+  --font-poppins: var(--font-poppins);
+  --font-dmmono: var(--font-dmmono);
+}
+
+@custom-variant mo {
+  @media screen and (width <= 1000px) {
+    @slot;
+  }
+}
