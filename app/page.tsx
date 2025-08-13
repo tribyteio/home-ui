@@ -1,5 +1,5 @@
 'use client'
-import { animate, createSpring, onScroll } from 'animejs'
+import { animate, createSpring, JSAnimation, onScroll } from 'animejs'
 import Link from "next/link"
 import React, { AllHTMLAttributes, ReactNode, Ref, useEffect, useRef, useState } from "react"
 import { AiFillSafetyCertificate } from "react-icons/ai"
@@ -48,9 +48,10 @@ function AnimItem({ className, children, as, anim = true, ...props }: AllHTMLAtt
 export default function Home() {
   useEffect(() => {
     const items = document.getElementsByClassName("animitem")
-    for (const element of items) {
-      animate(element, {
-        y: { from: 100 },
+    const anims: JSAnimation[] = []
+    for (let index = 0; index < items.length; index++) {
+      const element = items[index];
+      anims.push(animate(element, {
         opacity: { from: 0 },
         scale: { from: 0.8 },
         ease: createSpring({ stiffness: 70 }),
@@ -62,9 +63,12 @@ export default function Home() {
           enter: 'bottom top',
           leave: 'top bottom',
           repeat: true,
-        })
-      });
+          onLeave: () => { anims[index]?.reset() },
+          // debug: process.env.NODE_ENV == 'development'
+        }),
+      }));
     }
+
   }, []);
   const goTo = (urlpath: string) => {
     window.open(urlpath, urlpath.startsWith("#") ? '_self' : '_blank')
