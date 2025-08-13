@@ -83,7 +83,7 @@ export default function Home() {
       <div className="w-full fixed top-0 z-50">
         <div className="bg-[#5F5F5F] flex w-full h-[75px] mo:h-[56px]">
           <div className={cn("flex items-center gap-5 mx-auto relative mo:px-0", maxWidthClassName)}>
-            <div className="mo:px-4 flex w-full justify-between">
+            <div className="mo:px-4 flex items-center w-full justify-between">
               <Link href={'/'} className=" flex items-center mr-4 gap-3 text-[#F3F3F3]">
                 <img alt="Logo" src="/logo.svg" className="w-[69px] h-auto mo:w-[48px]" />
                 Tribyte
@@ -95,19 +95,25 @@ export default function Home() {
                       type={i === headerTabList.length - 1 ? '2' : '1'}
                       contentClassName={i === headerTabList.length - 1 ? 'py-2.5' : 'flex items-center gap-2'}
                       onClick={() => goTo(item.href)}
-                      content={<>{item.icon && <div className="text-[2rem]">{item.icon}</div>} {item.tabName}</>}
-                      className={i === headerTabList.length - 1 ? '' : 'ml-auto'} />
+                      content={<>{item.icon && <div className="text-2xl">{item.icon}</div>} {item.tabName}</>}
+                      className={i === headerTabList.length - 1 ? 'order-2' : 'ml-auto'} />
                   )
                 }
+                <Link href={twitterXLink} target="_blank" className='text-2xl'>
+                  <RiTwitterXFill className="text-gray-200 hover:text-white" />
+                </Link>
               </div>
+              <Link href={twitterXLink} target="_blank" className='text-2xl ml-auto mr-4 hidden mo:block'>
+                <RiTwitterXFill className="text-gray-200 hover:text-white" />
+              </Link>
               <MBtn ref={trigerRef} type="2" className="rounded-lg hidden mo:flex items-center" contentClassName="px-0.5 py-0 text-2xl hover:text-primary" content={<IoMenu />} onClick={() => setShowMenus(!showMenus)} />
             </div>
             <div ref={ref} className={cn("absolute top-full hidden w-full mo:flex bg-black transition-all p-5 flex-col gap-4  z-10", showMenus ? "translate-x-0" : "translate-x-full !hidden")}>
               {
                 headerTabList.map((item, i) =>
-                  <MBtn key={`head_${i}`} type="3" className="w-full" onClick={() => goTo(item.href)}
+                  <MBtn key={`head_${i}`} type="1" className="w-full" onClick={() => goTo(item.href)}
                     contentClassName="flex items-center gap-2"
-                    content={<><div className="text-[2rem]">{item.icon}</div> {item.tabName}</>} />)
+                    content={<><div className="text-2xl">{item.icon}</div> {item.tabName}</>} />)
               }
             </div>
           </div>
